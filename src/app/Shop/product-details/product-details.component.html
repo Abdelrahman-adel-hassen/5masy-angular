@@ -1,0 +1,53 @@
+<div class="container" *ngIf="stadium">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    <!-- This div contains the larger view of images -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="current-pic">
+                            <!-- Display the current selected image here -->
+                            <img [src]="selectedImage" />
+                        </div>
+                    </div>
+                    <!-- This div contains the thumbnails -->
+                    <div class="d-flex flex-row flex-wrap">
+                        <ng-container *ngFor="let image of stadium.picturesUrl; let i = index">
+                            <div class="picDown col-md-6 col-lg-3" [ngClass]="{ active: selectedImageIndex === i }">
+                                <!-- Use (click) event to update the selected image -->
+                                <a (click)="selectImage(i)">
+                                    <img class="h-100" [src]="image" />
+                                </a>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="details col-md-6">
+                    <h3 class="product-title">{{stadium.name}}</h3>
+
+                    <p class="product-description">{{stadium.description}}</p>
+                    <h4 class="price">Cost: <span>{{stadium.cost|currency}} </span> per
+                        <span>{{stadium.duration}}</span> min
+                    </h4>
+
+                    <p>Width:
+                        <span>{{stadium.width}}</span>
+                    </p>
+                    <p>Height:
+                        <span>{{stadium.height}}</span>
+                    </p>
+                    <mat-form-field>
+                        <mat-label>Select a date</mat-label>
+                        <input matInput [matDatepicker]="picker"  [(ngModel)]="selectedDate" [min]="minDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>                    
+                    <button type="button" class="btn btn-info" (click)="ChooseDateAndTime()">Choose Time</button>
+                        <app-payment [class.isDisabled]="selectedtimeSlots.length==0" [amount]="totalAmount"></app-payment>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <app-date-time></app-date-time> -->
+</div>

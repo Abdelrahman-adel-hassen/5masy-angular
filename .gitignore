@@ -40,3 +40,67 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+# Node.js / npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Angular generated files
+/dist/
+/ngsw.json
+
+# Compiled files
+*.js
+*.js.map
+*.css
+*.css.map
+
+# Log files
+*.log
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.prod
+
+# Compiled output of Typescript files
+/out-tsc/
+
+# IDE settings
+*.iml
+.idea/
+
+# Mac specific files
+.DS_Store
+
+# Compiled Sass
+*.compiled.css
+*.compiled.css.map
+
+# Dependency directories
+bower_components/
+
+# System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Angular CLI configuration
+angular.json
+
+# End-to-end testing
+e2e/protractor.conf.js
+
+# Angular Language Service
+*.ngsummary.json
+
+# Custom files or folders (add as needed)
+# example_folder/
+# example_file.txt

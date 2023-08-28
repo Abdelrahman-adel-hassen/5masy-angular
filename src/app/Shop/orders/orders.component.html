@@ -1,0 +1,49 @@
+<div class="container">
+    <ul class="nav nav-tabs d-flex justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" (click)="setSatatus(reservationStatus.All)"
+                [ngClass]="{active:status==reservationStatus.All}">
+                All</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setSatatus(reservationStatus.Responding)"
+                [ngClass]="{active:status==reservationStatus.Responding}">Upcomming</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setSatatus(reservationStatus.Finnished)"
+                [ngClass]="{active:status==reservationStatus.Finnished}">Ended</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setSatatus(reservationStatus.Canceled)"
+                [ngClass]="{active:status==reservationStatus.Canceled}">Canceled</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setSatatus(reservationStatus.Rejected)"
+                [ngClass]="{active:status==reservationStatus.Rejected}">Rejected</a>
+        </li>
+    </ul>
+    <table class="table">
+        <thead >
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">StadiumName</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reservation of reservations;let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{reservation.id}}</td>
+                <td>{{reservation.stadiumName}}</td>
+                <td>{{reservation.duration}}</td>
+                <td>{{reservation.cost}}</td>
+                <td>{{ reservation.status | enumToStringPipe:reservationStatus }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

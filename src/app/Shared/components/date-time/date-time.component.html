@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Select Time Slots</h2>
+<mat-dialog-content>
+  <div class="time-slot-cards">
+    <mat-card *ngFor="let timeSlot of timeSlots">
+      <mat-card-content>
+        <label class="checkbox-label">
+          <input type="checkbox" [(ngModel)]="timeSlot.selected" [disabled]="doesthisslotisreserved(timeSlot.time)" (click)="toggleTimeSlot(timeSlot)">
+          {{ timeSlot.time }}
+        </label>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" class="btn btn-light" (click)="submitTimeSlots()">OK</button>
+  <button type="button" class="btn btn-light" (click)="resetTimeSlots()">Reset</button>
+</mat-dialog-actions>

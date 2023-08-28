@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="bg-white rounded d-flex align-items-center justify-content-between flex-wrap" id="header">
+
+    <!-- Left Section -->
+    <ng-container *ngIf="totalCount>0">
+      <div class="SectionChild d-flex align-items-center flex-wrap">
+        <input type="text" class="form-control w-50" placeholder="Search" />
+        <select class="form-select w-25" aria-label="Default select example">
+          <option *ngFor="let searchType of getEnumKeysAndValues()" value="{{searchType.value}}">
+            {{ searchType.key }}
+          </option>
+        </select>
+        <input class="btn btn-outline-primary" type="submit" value="Submit">
+      </div>
+    </ng-container>
+    <!-- Right Section -->
+    <div class="SectionChild d-flex align-items-center justify-content-end flex-wrap">
+        <app-pager *ngIf="totalCount>0" (pageChanged)="pageChanged($event)" [collectionSize]="totalCount" [maxSize]="4"
+          [page]="StatdiumParams.pageIndex" [pageSize]="StatdiumParams.pageSize">
+        </app-pager>
+      <app-paging-header *ngIf="hasFinnishedToGetData" [totalCount]="totalCount || 0" [pageSize]="StatdiumParams.pageSize"
+        [pageNumber]="StatdiumParams.pageIndex"></app-paging-header>
+        <div *ngIf="!hasFinnishedToGetData" class="invisible">Showing 9 - 14 of 14 results</div>
+    </div>
+  </div>
+
+  <div id="content" class="my-5">
+
+    <div id="products">
+      <div class="row">
+        <ng-container *ngFor="let stadium of Statdiums">
+          <div class="col-lg-3 col-md-6">
+            <div class="parentCard card d-flex flex-column align-items-center justify-content-center">
+              <div class="product-name">{{stadium.name}}</div>
+              <div class="card-img">
+                <a routerLink="Shop/{{stadium.id}}">
+                  <img class="w-100" src="{{stadium.picturesUrl[0]}}" alt="" />
+                </a>
+              </div>
+              <div class="card-body pt-3">
+                <div class="text-muted text-center">Cost: <span>{{stadium.cost|currency}} </span> per
+                  <span>{{stadium.duration}}</span> min </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
