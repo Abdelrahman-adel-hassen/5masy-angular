@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './Home/home.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './Core/core.module';
 import { SharedModule } from './Shared/shared.module';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -12,14 +12,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { LoadingInterceptor } from './Core/interceptors/loading.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmationComponent,
   ],
-  providers: [],
   bootstrap: [AppComponent],
   imports: [
     BrowserAnimationsModule,
@@ -33,6 +32,11 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
     HttpClientModule,
     CoreModule,
     SharedModule,
+    NgxSpinnerModule
+
+  ],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
   ],
 })
 export class AppModule {}

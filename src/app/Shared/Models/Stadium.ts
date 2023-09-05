@@ -3,7 +3,7 @@ export interface IStadium {
     name: string;
     type: string;
     cost: number;
-    duration: string;
+    duration: number;
     width: number;
     height: number;
     country: string;

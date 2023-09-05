@@ -1,29 +1,32 @@
 <div class="container">
-    <ul class="nav nav-tabs d-flex justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link" (click)="setSatatus(reservationStatus.All)"
-                [ngClass]="{active:status==reservationStatus.All}">
-                All</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" (click)="setSatatus(reservationStatus.Responding)"
-                [ngClass]="{active:status==reservationStatus.Responding}">Upcomming</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" (click)="setSatatus(reservationStatus.Finnished)"
-                [ngClass]="{active:status==reservationStatus.Finnished}">Ended</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" (click)="setSatatus(reservationStatus.Canceled)"
-                [ngClass]="{active:status==reservationStatus.Canceled}">Canceled</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" (click)="setSatatus(reservationStatus.Rejected)"
-                [ngClass]="{active:status==reservationStatus.Rejected}">Rejected</a>
-        </li>
-    </ul>
+    <div>
+        <ul class="nav nav-tabs d-flex justify-content-center w-100">
+            <li class="nav-item">
+                <a class="nav-link" (click)="setSatatus(reservationStatus.All)"
+                    [ngClass]="{active:status==reservationStatus.All}">
+                    All</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setSatatus(reservationStatus.Responding)"
+                    [ngClass]="{active:status==reservationStatus.Responding}">Upcomming</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setSatatus(reservationStatus.Finnished)"
+                    [ngClass]="{active:status==reservationStatus.Finnished}">Ended</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setSatatus(reservationStatus.Canceled)"
+                    [ngClass]="{active:status==reservationStatus.Canceled}">Canceled</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setSatatus(reservationStatus.Rejected)"
+                    [ngClass]="{active:status==reservationStatus.Rejected}">Rejected</a>
+            </li>
+        </ul>
+    </div>
+
     <table class="table">
-        <thead >
+        <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">ID</th>
@@ -39,8 +42,14 @@
                 <td>{{reservation.id}}</td>
                 <td>{{reservation.stadiumName}}</td>
                 <td>{{reservation.duration}}</td>
-                <td>{{reservation.cost}}</td>
-                <td>{{ reservation.status | enumToStringPipe:reservationStatus }}</td>
+                <td>{{reservation.cost|currency}}</td>
+                <td class="flex justify-content-center">
+                    {{ reservation.status | enumToStringPipe:reservationStatus }}
+                    <ng-container *ngIf="status==reservationStatus.Responding">
+                        <button type="button" (click)="canelOrder(reservation.id)">Cancel</button>
+                    </ng-container>
+                </td>
+
             </tr>
 
         </tbody>

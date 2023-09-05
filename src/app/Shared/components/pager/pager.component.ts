@@ -12,8 +12,6 @@ export class PagerComponent {
   @Input() maxSize=0;
   @Output() pageChanged = new EventEmitter<number>();
   onPagerChange(event:any){
-    console.log(event);
-    console.log(this.page);
     this.pageChanged.emit(event);
   }
 }

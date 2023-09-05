@@ -10,11 +10,9 @@
                             <img [src]="selectedImage" />
                         </div>
                     </div>
-                    <!-- This div contains the thumbnails -->
                     <div class="d-flex flex-row flex-wrap">
                         <ng-container *ngFor="let image of stadium.picturesUrl; let i = index">
                             <div class="picDown col-md-6 col-lg-3" [ngClass]="{ active: selectedImageIndex === i }">
-                                <!-- Use (click) event to update the selected image -->
                                 <a (click)="selectImage(i)">
                                     <img class="h-100" [src]="image" />
                                 </a>
@@ -30,24 +28,40 @@
                         <span>{{stadium.duration}}</span> min
                     </h4>
 
-                    <p>Width:
+                    <p class="price">Width:
                         <span>{{stadium.width}}</span>
                     </p>
-                    <p>Height:
+                    <p class="price">Height:
                         <span>{{stadium.height}}</span>
                     </p>
                     <mat-form-field>
                         <mat-label>Select a date</mat-label>
-                        <input matInput [matDatepicker]="picker"  [(ngModel)]="selectedDate" [min]="minDate">
+                        <input matInput [matDatepicker]="picker" (ngModelChange)="dateOnchange()" [(ngModel)]="selectedDate" [min]="minDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>                    
-                    <button type="button" class="btn btn-info" (click)="ChooseDateAndTime()">Choose Time</button>
-                        <app-payment [class.isDisabled]="selectedtimeSlots.length==0" [amount]="totalAmount"></app-payment>
-                
+                    </mat-form-field>
+                    <div class="timeslots">
+                        <ul *ngIf="selectedtimeSlots.length>0"
+                            class="list-group list-group-horizontal position-relative overflow-auto">
+                            <ng-container *ngFor="let time of selectedtimeSlots">
+                                <li class="list-group-item">{{time}}</li>
+
+                            </ng-container>
+                        </ul>
+
+                        <p *ngIf="selectedtimeSlots.length>0">
+                            Price: {{totalAmount|currency}}
+                        </p>
+
+                    </div>
+                    <button type="button"  class="chooseDate btn btn-info" (click)="ChooseTimeSlots()">
+                        {{selectedtimeSlots.length==0?"Choose Time":"Edit Time"}}
+                    </button>
+
+                    <button (click)="reserve()" type="button" class="btn btn-warning" [class.isDisabled]="selectedtimeSlots.length==0">Reserve</button>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- <app-date-time></app-date-time> -->
 </div>

@@ -35,13 +35,22 @@ export class ShopService {
       params: params,
     });
   }
-  getreservationDates(
-    start:Date
-  ) {
+  getreservationDates(start: Date, stadiumId: number) {
     let params = new HttpParams();
     params = params.append('start', start.toDateString());
-  console.log("isotostring= ",start);
+    params = params.append('StadiumId', stadiumId);
     return this.http.get<string[]>(this.baseUrl + 'Reservation/Dates', {
+      params: params,
+    });
+  }
+  createReservation(reservation: IReservation) {
+    return this.http.post<IReservation>(this.baseUrl + 'Reservation', reservation);
+  }
+  cancelReservatoin(id: number, status: ReservationStatus) {
+    let params = new HttpParams();
+    params = params.append('id', id);
+    params = params.append('status', status);
+    return this.http.put<IReservation>(this.baseUrl + 'Reservation',null, {
       params: params,
     });
   }
